@@ -45,18 +45,26 @@
 }
 
 .wk-login-content-form input {
-    border: 1px solid rgba(0, 0, 0, .20);
-    border-radius: 4px;
-    color: rgba(0, 0, 0, 1);
+    border: none;
+    border-bottom: 1px solid var(--wk-color-theme);
+    background-color: #ffffff; /* 将背景色修改为纯白色 */
+    border-radius: 4px; /* 添加圆角 */
+    color: rgba(0, 0, 0, 0.8);
     display: block;
     font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    height: 42px;
-    margin-bottom: 12px;
+    font-size: 16px;
+    height: 40px;
+    margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 16px;
-    width: 286px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.wk-login-content-form input:focus {
+    border-bottom: 1px solid var(--wk-color-theme); /* 修改获取焦点时边框颜色为登录按钮颜色 */
+    outline: none; /* 移除默认的聚焦边框 */
 }
 
 .wk-login-content-form-buttons {
@@ -72,9 +80,17 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    font-size: 16px;
-    padding: 9.5px 20px;
-    margin-top: 24px;
+    font-size: 18px;
+    padding: 10px 0; /* 按钮内边距修改 */
+    margin-top: 20px;
+    background-color: var(--wk-color-theme);
+    color: #fff;
+    width: 90%; /* 宽度占据90% */
+    max-width: 500px;
+}
+
+.wk-login-content-form-ok:hover {
+    background-color: #ff9a00;
 }
 
 .wk-login-content-form-others {
@@ -229,4 +245,24 @@
     width: 50px;
     height: 50px;
     cursor: pointer;
+}
+
+.wk-login-content-form-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.wk-login-content-form-links a {
+    color: var(--wk-color-theme); /* 与登录按钮的背景色一致 */
+    font-size: 15px; /* 与“扫描登录”字体大小一致 */
+    text-decoration: none;
+}
+
+.wk-login-content-form-divider {
+    width: 1px;
+    height: 15px; /* 调整分隔线的高度以与字体垂直居中对齐 */
+    background-color: var(--wk-color-theme); /* 与登录按钮的背景色一致 */
+    margin: 0 15px; /* 左右间距均为30px */
 }

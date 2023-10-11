@@ -8,7 +8,7 @@ import  { LoginModule } from '@tsdaodao/login';
 import  { DataSourceModule } from '@tsdaodao/datasource';
 import {ContactsModule} from '@tsdaodao/contacts';
 
-const apiURL = "https://api.botgate.cn/v1/"
+const apiURL = "http://172.104.181.205:8090/v1/"
 
 if(!(window as any).__TAURI_IPC__) { // tauri环境
   if(process.env.NODE_ENV === "development") {

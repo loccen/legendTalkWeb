@@ -32,7 +32,7 @@ class Login extends Component<any, LoginState> {
                             <img src={"/logo.png"} alt="logo" />
                         </div>
                         <div className="wk-login-content-slogan">
-                            更愉快的与朋友交流
+                           欢迎登录星连
                         </div>
                         <div className="wk-login-content-form">
                             <input type="text" placeholder="手机号" onChange={(v) => {
@@ -67,12 +67,13 @@ class Login extends Component<any, LoginState> {
                                 }}>登录</Button>
                             </div>
                             <div className="wk-login-content-form-others">
-                                <div className="wk-login-content-form-scanlogin" onClick={() => {
-                                    vm.loginType = LoginType.qrcode
-                                }}>
-                                    扫描登录
+                                <div className="wk-login-content-form-links">
+                                    <a href="#">注册</a>
+                                    <div className="wk-login-content-form-divider"></div>
+                                    <a href="#">忘记密码</a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div className={classNames("wk-login-content-scanlogin", vm.loginType === LoginType.qrcode ? "wk-login-content-scanlogin-show" : undefined)}>
