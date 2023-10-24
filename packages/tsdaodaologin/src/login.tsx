@@ -32,7 +32,7 @@ class Login extends Component<any, LoginState> {
                             <img src={"/logo.png"} alt="logo" />
                         </div>
                         <div className="wk-login-content-slogan">
-                           欢迎登录星连
+                           欢迎登录传奇Talk
                         </div>
                         <div className="wk-login-content-form">
                             <input type="text" placeholder="手机号" onChange={(v) => {
@@ -126,7 +126,7 @@ class Login extends Component<any, LoginState> {
 
                     {/* <div className="wk-login-footer">
                         <ul>
-                            <li>注册唐僧叨叨</li>
+                            <li>注册传奇Talk</li>
                             <li>忘记密码</li>
                             <li>隐私政策</li>
                             <li>用户协议</li>
