@@ -5,6 +5,10 @@ import './login.css'
 import QRCode from 'qrcode.react';
 import { WKApp, Provider } from "@tsdaodao/base"
 import { LoginStatus, LoginType, LoginVM } from "./login_vm";
+enum RegisterType {
+    register = "REGISTER"
+}
+
 import classNames from "classnames";
 
 type LoginState = {
@@ -42,7 +46,7 @@ class Login extends Component<any, LoginState> {
                                 vm.password = v.target.value
                             }}></input>
                             <div className="wk-login-content-form-buttons">
-                                <Button loading={vm.loginLoading} className="wk-login-content-form-ok" type='primary' theme='solid' onClick={async () => {
+                                <Button loading={vm.loginLoading} className="wk-login-content-form-ok" type='primary' onClick={async () => {
                                     if (!vm.username) {
                                         Toast.error("手机号不能为空！")
                                         return
@@ -64,11 +68,13 @@ class Login extends Component<any, LoginState> {
                                     vm.requestLoginWithUsernameAndPwd(fullPhone, vm.password).catch((err) => {
                                         Toast.error(err.msg)
                                     })
-                                }}>登录</Button>
+                                }} theme='solid'>登录</Button>
                             </div>
                             <div className="wk-login-content-form-others">
                                 <div className="wk-login-content-form-links">
-                                    <a href="#">注册</a>
+                                    <a href="#" onClick={() => { vm.loginType = LoginType.register; vm.notifyListener(); }}>
+                                        {vm.loginType === LoginType.register ? "返回登录" : "注册"}
+                                    </a>
                                     <div className="wk-login-content-form-divider"></div>
                                     <a href="#">忘记密码</a>
                                 </div>
@@ -116,27 +122,52 @@ class Login extends Component<any, LoginState> {
                                 </li>
                             </ul>
                         </div>
+
                         <div className="wk-login-footer-buttons">
-                            <button onClick={() => {
-                                vm.loginType = LoginType.phone
-                            }}>使用手机号登录</button>
+                                <button onClick={() => {
+                                    vm.loginType = LoginType.phone
+                                }}>使用手机号登录</button>
+                            </div>
+
                         </div>
 
+                        {/* <div className="wk-login-footer">
+                            <ul>
+                                <li>注册传奇Talk</li>
+                                <li>忘记密码</li>
+                                <li>隐私政策</li>
+                                <li>用户协议</li>
+                                <li> © 上海信必达网络科技有限公司</li>
+                            </ul>
+
+                        </div> */}
                     </div>
-
-                    {/* <div className="wk-login-footer">
-                        <ul>
-                            <li>注册传奇Talk</li>
-                            <li>忘记密码</li>
-                            <li>隐私政策</li>
-                            <li>用户协议</li>
-                            <li> © 上海信必达网络科技有限公司</li>
-                        </ul>
-
-                    </div> */}
-                </div>
-
-
+                    <div className="wk-login-content-register" style={{ "display": vm.loginType === LoginType.register ? "block" : "none" }}>
+                        <div className="wk-login-content-logo">
+                            <img src={"/logo.png"} alt="logo" />
+                        </div>
+                        <div className="wk-login-content-slogan">
+                            注册传奇Talk
+                        </div>
+                        <div className="wk-login-content-form">
+                            <input type="text" placeholder="手机号" onChange={(v) => {
+                                vm.phone = v.target.value
+                            }}></input>
+                            <input type="password" placeholder="密码" onChange={(v) => {
+                                vm.password = v.target.value
+                            }}></input>
+                            <input type="password" placeholder="确认密码" onChange={(v) => {
+                                vm.repeatPassword = v.target.value
+                            }}></input>
+                            <div className="wk-login-content-form-buttons">
+                                <Button loading={vm.registerLoading} className="wk-login-content-form-ok" type='primary' theme='solid' onClick={async () => {
+                                    vm.register();
+                                }}>
+                                    注册
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
             </div>
         }}>
 

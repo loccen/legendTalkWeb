@@ -1,6 +1,4 @@
 build:
-	docker build -t tangsengdaodaoweb .
+	docker build -t legendTalk .
 deploy:
-	docker build -t tangsengdaodaoweb  .
-	docker tag tangsengdaodaoweb registry.cn-shanghai.aliyuncs.com/wukongim/tangsengdaodaoweb:latest
-	docker push registry.cn-shanghai.aliyuncs.com/wukongim/tangsengdaodaoweb:latest
+	docker build -t legendTalk  .

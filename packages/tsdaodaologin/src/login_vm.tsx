@@ -1,4 +1,6 @@
 import { WKApp, ProviderListener } from "@tsdaodao/base";
+import axios from "axios";
+import {Toast} from "@douyinfe/semi-ui";
 
 
 export class LoginStatus {
@@ -12,6 +14,7 @@ export class LoginStatus {
 export enum LoginType {
     qrcode, // 二维码登录
     phone, // 手机号登录
+    register // 注册
 }
 
 export class LoginVM extends ProviderListener {
@@ -35,6 +38,13 @@ export class LoginVM extends ProviderListener {
     username?:string
     password?:string
 
+    // ---------- Registration ----------
+    zone?: string
+    phone?: string
+    code?: string
+    repeatPassword?: string
+    registerLoading: boolean = false // Registration in progress
+
     set autoRefresh(v: boolean) {
         this._autoRefresh = v
         this.notifyListener()
@@ -48,7 +58,48 @@ export class LoginVM extends ProviderListener {
         return this._autoRefresh
     }
 
-    didMount(): void {
+    
+    async register() {
+        try {
+            this.registerLoading = true;
+            this.notifyListener();
+            // 判断密码是否一致
+            if (this.password !== this.repeatPassword) {
+                // 提示密码不一致
+                Toast.error("密码不一致！")
+                return
+            }
+            
+            const response = await axios.post('/user/register', {
+                zone: "0086",
+                phone: this.phone,
+                code: "668899",
+                password: this.password,
+                flag: 1,
+                device: {
+                    device_id: "some_device_id", // You might want to replace this with a real value
+                    device_name: "PC",
+                    device_model: "Web Browser"
+                }
+            });
+
+            // Handle the response (e.g., show a success message or handle errors)
+            if (response.status === 200) {
+                // Handle success
+                this.loginSuccess(response.data)
+            } else {
+                // Handle errors
+                Toast.error("注册失败！")
+            }
+        } catch (error) {
+            // Handle errors
+        } finally {
+            this.registerLoading = false;
+            this.notifyListener();
+        }
+    }
+
+didMount(): void {
         this.advance()
     }
 
